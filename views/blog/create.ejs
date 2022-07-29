@@ -1,0 +1,11 @@
+<%- include('../partials/head') %>
+
+<h1>Create Page - TODO</h1>
+
+<form action="/blog/create" method="POST">
+    Title: <input type="text" name="title">
+    Content: <textarea name="content" cols="30" rows="10"></textarea>
+    <button type="submit">Post</button>
+</form>
+
+<%- include('../partials/foot') %>
