@@ -1,9 +1,12 @@
 <%- include('../partials/head') %>
 
 <h1>Index Page - TODO</h1>
+
+<a href="/blog/create">Create</a><br>
+
 <%= blogs %> <br>
 <% for (let blog of blogs){ %>
-    <a href="/blog/<%= blog._id %>">link</a>
+    <a href="/blog/<%= blog.id %>">link</a>
     <%= blog.id %>
     <%= blog.title %>
     <%= blog.content %> <br>
