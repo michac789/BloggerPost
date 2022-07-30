@@ -15,19 +15,15 @@ app.use(methodOverride('_method'))
 
 // custom logger middleware
 const { logger } = require('./middleware/logger')
+const { errorhandler } = require('./middleware/errorhandler')
 app.use(logger)
 
 // load util functions
 const asyncWrap = require('./utils/asyncWrap')
 const ExpressError = require('./utils/ExpressError')
 
-// load our models
-const BlogPost = require('./models/blog')
-const User = require('./models/user')
-
 // connect to mongoose
 const mongoose = require('mongoose')
-const { wrap } = require('module')
 mongoose.connect('mongodb://localhost:27017/blogpost', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -50,88 +46,21 @@ app.get('/', (req, res) => {
     res.render('templates/home')
 })
 
-// auth - login, register, logout
-app.get('/login', (req, res) => {
-    res.render('auth/login')
-})
-app.post('/login', asyncWrap(async(req, res) => {
-    const { username, password } = req.body
-    const user = await User.validate(username, password)
-    if(user) {
-        res.redirect('/')
-    } else {
-        res.redirect('/login')
-    }
-}))
+// auth app (register, login, logout)
+const auth = require('./routes/auth')
+app.use('/auth', auth)
 
-app.get('/register', (req, res) => {
-    res.render('auth/register')
-})
-app.post('/register', asyncWrap(async(req, res) => {
-    const user = new User(req.body)
-    await user.save()
-    res.redirect('/')
-}))
+// blog app
+const blog = require('./routes/blog')
+app.use('/blog', blog)
 
-// blog - read all
-app.get('/blog', asyncWrap(async(req, res) => {
-    const blogs = await BlogPost.find({})
-    res.render('blog/index', { blogs })
-}))
-
-// blog - create
-app.get('/blog/create', (req, res) => {
-    res.render('blog/create')
-})
-app.post('/blog/create', asyncWrap(async(req, res) => {
-    const newblog = new BlogPost(req.body)
-    await newblog.save()
-    res.redirect(`/blog/${newblog.id}`)
-}))
-
-// blog - read
-app.get('/blog/:id', asyncWrap(async(req, res) => {
-    const blog = await BlogPost.findById(req.params.id)
-    res.render('blog/view', { blog })
-}))
-
-// blog - update
-app.get('/blog/:id/edit', asyncWrap(async(req, res) => {
-    const blog = await BlogPost.findById(req.params.id)
-    res.render('blog/edit', { blog })
-}))
-
-// blog - save update
-app.put('/blog/:id', asyncWrap(async(req, res) => {
-    const { id } = req.params
-    // console.log("put route")
-    // console.log(req.body)
-    const blog = await BlogPost.findByIdAndUpdate(
-        id, { ...req.body }
-    )
-    res.redirect(`/blog/${blog._id}`)
-}))
-
-// blog - delete TODO
-app.delete('/blog/:id', asyncWrap(async(req, res) => {
-    console.log("DELETE ROUTE")
-    const { id } = req.params
-    await BlogPost.findByIdAndDelete(id)
-    res.redirect('/blog')
-}))
-
+// error handler for other undefined routes
 app.all("*", (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
 
 // custom middleware to catch all errors here
-app.use(
-    (err, req, res, next) => {
-        const { statusCode = 500 } = err
-        if (!err.message) err.message = "Default Error Message!"
-        res.status(statusCode).render('layout/error', { err, statusCode })
-    }
-)
+app.use(errorhandler)
 
 // display active port
 app.listen(PORT, () => {
