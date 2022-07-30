@@ -50,6 +50,29 @@ app.get('/', (req, res) => {
     res.render('templates/home')
 })
 
+// auth - login, register, logout
+app.get('/login', (req, res) => {
+    res.render('auth/login')
+})
+app.post('/login', asyncWrap(async(req, res) => {
+    const { username, password } = req.body
+    const user = await User.validate(username, password)
+    if(user) {
+        res.redirect('/')
+    } else {
+        res.redirect('/login')
+    }
+}))
+
+app.get('/register', (req, res) => {
+    res.render('auth/register')
+})
+app.post('/register', asyncWrap(async(req, res) => {
+    const user = new User(req.body)
+    await user.save()
+    res.redirect('/')
+}))
+
 // blog - read all
 app.get('/blog', asyncWrap(async(req, res) => {
     const blogs = await BlogPost.find({})
