@@ -9,11 +9,11 @@ const ejsMate = require('ejs-mate')
 app.engine('ejs', ejsMate)
 
 // method-override middleware
-// allow other request methods such as "PUT" or "DELETE"
+// allow other request methods such as "PUT" and "DELETE"
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
-// other custom middleware
+// custom logger middleware
 const { logger } = require('./middleware/logger')
 app.use(logger)
 
