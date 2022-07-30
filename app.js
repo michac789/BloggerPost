@@ -4,9 +4,18 @@ const app = express()
 const path = require('path')
 const PORT = 3100
 
+// ejs-mate: allow making 'extended' view
+const ejsMate = require('ejs-mate')
+app.engine('ejs', ejsMate)
+
+// method-override middleware
 // allow other request methods such as "PUT" or "DELETE"
 const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
+
+// other custom middleware
+const { logger } = require('./middleware/logger')
+app.use(logger)
 
 // load our models
 const BlogPost = require('./models/blog')

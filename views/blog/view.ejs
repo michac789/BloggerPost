@@ -1,4 +1,4 @@
-<%- include('../partials/head') %>
+<% layout('layout/root')%>
 
 <h1>View Page - TODO</h1>
 <%= blog.id %> <br>
@@ -11,5 +11,3 @@
 <form action="/blog/<%= blog._id %>?_method=DELETE" method="POST">
     <button>Delete</button>
 </form>
-
-<%- include('../partials/foot') %>
