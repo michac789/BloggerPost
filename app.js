@@ -15,7 +15,7 @@ app.use(methodOverride('_method'))
 
 // custom logger middleware
 const { logger } = require('./middleware/logger')
-const { errorhandler } = require('./middleware/errorhandler')
+const { errorHandler } = require('./middleware/errorHandler')
 app.use(logger)
 
 // load util functions
@@ -97,7 +97,7 @@ app.all("*", (req, res, next) => {
 })
 
 // custom middleware to catch all errors here
-app.use(errorhandler)
+app.use(errorHandler)
 
 // display active port
 app.listen(PORT, () => {

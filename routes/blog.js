@@ -9,9 +9,10 @@ const BlogPost = require('../models/blog')
 const asyncWrap = require('../utils/asyncWrap')
 const ExpressError = require('../utils/ExpressError')
 
+const { loginRequired } = require('../middleware/loginRequired')
 
 // blog - read all
-router.get('', asyncWrap(async(req, res) => {
+router.get('', loginRequired, asyncWrap(async(req, res) => {
     // if (!req.isAuthenticated()) {
     //     res.send("not logged in")
     // }

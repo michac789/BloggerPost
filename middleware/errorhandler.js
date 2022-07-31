@@ -3,10 +3,10 @@
     It will then render the error page, passing the appropriate error messages
     and status code.
 */
-const errorhandler = (err, _, res, __) => {
+const errorHandler = (err, _, res, __) => {
     const { statusCode = 500 } = err
     if (!err.message) err.message = "Default Error Message!"
     res.status(statusCode).render('layout/error', { err, statusCode })
 }
 
-module.exports = { errorhandler }
+module.exports = { errorHandler }
