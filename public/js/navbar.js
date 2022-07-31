@@ -1,19 +1,10 @@
-// this file is required for bulma navbar burgers to work on smaller screens
+$(document).ready(function() {
 
-$(document).ready(() => {
-
-    // get 
-    const navburgers = Array.prototype.slice.call($('.navbar-burger'), 0);
-    navburgers.forEach(el => {
-        el.onclick = () => {
-
-            // Get the target from the "data-target" attribute
-            const target = el.dataset.target;
-            const $target = document.getElementById(target);
-
-            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-            el.classList.toggle('is-active');
-            $target.classList.toggle('is-active');
-        };
-    });
-});
+    // Check for click events on the navbar burger icon
+    $(".navbar-burger").click(function() {
+  
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        $(".navbar-burger").toggleClass("is-active")
+        $(".navbar-menu").toggleClass("is-active")
+    })
+})
