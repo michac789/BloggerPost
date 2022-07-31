@@ -3,10 +3,11 @@
 <h1>Edit Page - TODO</h1>
 
 <form action="/blog/<%= blog.id %>?_method=PUT" method="POST">
-    <input type="text" name="title" id="" value="<%= blog.title %>">
-    <textarea name="content" id="" cols="30" rows="10"
-        value=""><%= blog.content %></textarea>
-    <button type="submit">Update</button>
+    <%- include('../partials/blogform', {
+        title: blog.title, content: blog.content,
+        submitMsg: "Update", submitClass: "is-success",
+        cancelLink: `/blog/${blog.id}`,
+    }) %>
 </form>
 
 <a href="/blog/<%= blog.id %>">

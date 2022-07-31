@@ -1,9 +1,16 @@
-<% layout('layout/root')%>
+<% layout('layout/root') %>
 
 <h1>Create Page - TODO</h1>
 
+<span class="icon">
+    haa
+    <i class="fas fa-home"></i>
+</span>
+
 <form action="/blog/create" method="POST">
-    Title: <input type="text" name="title">
-    Content: <textarea name="content" cols="30" rows="10"></textarea>
-    <button type="submit">Post</button>
+    <%- include('../partials/blogform', {
+        title: "", content: "",
+        submitMsg: "Create", submitClass: "is-primary",
+        cancelLink: "/blog",
+    }) %>
 </form>
