@@ -45,6 +45,40 @@ app.use(express.urlencoded({ extended: true,}))
 // load static files
 app.use(express.static(path.join(__dirname, '/public')))
 
+// ??
+const session = require('express-session')
+const flash = require('connect-flash')
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+app.use(session(sessionConfig))
+app.use(flash())
+
+// passport (for auth)
+const User = require('./models/user')
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
+
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+app.use((req, res, next) => {
+    // console.log(req.session)
+    console.log(req.user)
+    res.locals.user = req.user
+    next()
+})
+
 app.get('/', (req, res) => {
     res.render('templates/home')
 })

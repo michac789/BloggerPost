@@ -12,6 +12,9 @@ const ExpressError = require('../utils/ExpressError')
 
 // blog - read all
 router.get('', asyncWrap(async(req, res) => {
+    if (!req.isAuthenticated()) {
+        res.send("not logged in")
+    }
     const blogs = await BlogPost.find({})
     res.render('blog/index', { blogs })
 }))
