@@ -5,16 +5,11 @@ const router = express.Router()
 const User = require('../models/user')
 const asyncWrap = require('../utils/asyncWrap')
 
-// middleware - TODO
-const loginRequired = (req, res, next) => {
-    if (!req.session.user_id) {
-        // flash - TODO
-        return res.redirect('/auth/login')
-    }
-    next()
-}
 
-router.get('/register', (req, res) => {
+// middleware - TODO
+
+
+router.get('/register', (_, res) => {
     res.render('auth/register')
 })
 
@@ -28,7 +23,8 @@ router.post('/register', asyncWrap(async(req, res, next) => {
             res.redirect('/')
         })
     } catch (err) {
-        console.log(err)
+        console.log(err) // TODO - handle error cases
+        req.flash('error', 'Oops! Something went wrong!')
         res.redirect('/auth/register')
     }
 }))
@@ -40,19 +36,18 @@ router.get('/login', (req, res) => {
 router.post('/login', passport.authenticate('local',
         { failureFlash: true, failureRedirect: '/auth/login' }),
         (req, res) => {
-    //req.flash('success', 'welcome back!');
-    const redirectUrl = req.session.returnTo || '/';
+    req.flash('success', `Welcome back, ${req.user.username}!`)
+    const redirectUrl = req.session.returnTo || '/'
     delete req.session.returnTo;
     res.redirect(redirectUrl);
 })
 
-router.post('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/auth/login')
-})
-
-router.get('/secret', loginRequired, (req, res) => {
-    res.send("SECRET")
+router.get('/logout', (req, res, next) => {
+    req.logout((err) => {
+        if (err) { return next(err) }
+        req.flash('success', `Successfully logged out!`)
+        res.redirect('/auth/login')
+    })
 })
 
 module.exports = router
