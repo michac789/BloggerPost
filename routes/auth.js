@@ -24,7 +24,7 @@ router.post('/register', asyncWrap(async(req, res, next) => {
         })
     } catch (err) {
         console.log(err) // TODO - handle error cases
-        req.flash('error', 'Oops! Something went wrong!')
+        req.flash('error', `Error: ${err}`)
         res.redirect('/auth/register')
     }
 }))

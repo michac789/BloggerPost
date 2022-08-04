@@ -1,0 +1,12 @@
+.fixedbottom {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 5px;
+    padding-left: 10px;
+}
+
+.smallfont {
+    font-size: small;
+}

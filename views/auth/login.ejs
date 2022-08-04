@@ -1,9 +1,40 @@
 <% layout('layout/root')%>
 
-<h1>Login Page</h1>
-
-<form action="/auth/login" method="POST">
-    <input type="text" name="username" id="">
-    <input type="text" name="password" id="">
-    <button type="submit">Login</button>
-</form>
+<div class="box mt-5">   
+    <h3 class="subtitle is-3 is-centered">
+        <u>
+            Log In
+        </u>
+    </h3>
+    <form action="/auth/login" method="POST">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Username" name="username">
+                <span class="icon is-small is-left">
+                    <i class='fas fa-user-alt'></i>
+                </span>
+                <!-- <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                </span> TODO -->
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Password" name="password">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="mt-5 ml-1">
+            <a href="/auth/register">
+                Don't have an account yet? Click here to sign up instead
+            </a>
+        </div>
+        <div class="buttons is-centered">
+            <button class="button is-link is-rounded is-centered" type="submit">
+                Login
+            </button>
+        </div>
+    </form>
+</div>

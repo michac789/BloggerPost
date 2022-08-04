@@ -11,13 +11,8 @@
 </head>
 <body>
     <%- include('../partials/navbar') %>
-    <main class="container block is-max-widescreen">
+    <main class="container block is-max-widescreen mb-10">
         <div class="m-3">
-            <% if (user) { %>
-                logged in as <%= user.username %>
-            <% } else { %>
-                not logged in
-            <% } %> <br>
             <%- include('../partials/flashmsg') %>
             <%- body %>
         </div>
