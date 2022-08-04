@@ -1,0 +1,38 @@
+<div class="field">
+    <label for="title" class="label">
+        Title:
+    </label>
+    <div class="control">
+        <input class="input" type="text" name="title" id="title"
+            value="<%= title %>">
+    </div>
+    <p class="help is-success">
+        Valid
+    </p>
+    <p class="help is-danger">
+        Invalid
+    </p>
+</div>
+
+<div class="field">
+    <label class="label" for="content">
+        Content:
+    </label>
+    <div class="control">
+        <textarea class="textarea" name="content" id="content"
+        ><%= content %></textarea>
+    </div>
+</div>
+
+<div class="field is-grouped">
+    <div class="control">
+        <button class="button <%= submitClass %>" type="submit">
+            <%= submitMsg %>
+        </button>
+    </div>
+    <div class="control">
+        <a href="<%= cancelLink %>" class="button is-link is-light">
+            Cancel
+        </a>
+    </div>
+</div>

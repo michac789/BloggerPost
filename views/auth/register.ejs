@@ -1,0 +1,45 @@
+<% layout('layout/root')%>
+
+<div class="box mt-5">
+    <h3 class="subtitle is-3 is-centered">
+        <u>
+            Sign Up
+        </u>
+    </h3>
+    <form action="/auth/register" method="POST">
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Username" name="username">
+                <span class="icon is-small is-left">
+                    <i class='fas fa-user-alt'></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="text" placeholder="Email" name="email">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input" type="password" placeholder="Password" name="password">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="mt-5 ml-1">
+            <a href="/auth/login">
+                Already have an account? Click here to log in instead
+            </a>
+        </div>
+        <div class="buttons is-centered">
+            <button class="button is-primary is-rounded is-centered" type="submit">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
