@@ -14,33 +14,42 @@ module.exports.createDo = async (req, res) => {
     const newblog = new BlogPost(req.body)
     newblog.author = req.user._id
     await newblog.save()
+    req.flash('success', 'Changes saved successfully!')
     res.redirect(`/blog/${newblog.id}`)
 }
 
 module.exports.viewBlog = async (req, res) => {
     const blog = await BlogPost.findById(req.params.id)
+        .populate('author')
+    if (!blog) {
+        req.flash('error', 'Invalid Blog ID!')
+        return res.redirect('/blog')
+    }
     res.render('blog/view', { blog })
 }
 
 module.exports.updateForm = async (req, res) => {
     const blog = await BlogPost.findById(req.params.id)
+    if (!blog) {
+        req.flash('error', 'Invalid Blog ID!')
+        return res.redirect('/blog')
+    }
     res.render('blog/edit', { blog })
 }
 
 module.exports.updateDo = async (req, res) => {
     console.log("barabarbarbar")
     const { id } = req.params
-    // console.log("put route")
-    // console.log(req.body)
     const blog = await BlogPost.findByIdAndUpdate(
         id, { ...req.body }
     )
+    req.flash('success', 'Changes saved successfully!')
     res.redirect(`/blog/${blog._id}`)
 }
 
 module.exports.deleteBlog = async (req, res) => {
-    console.log("DELETE ROUTE")
     const { id } = req.params
     await BlogPost.findByIdAndDelete(id)
+    req.flash('success', 'Blog post deleted!')
     res.redirect('/blog')
 }

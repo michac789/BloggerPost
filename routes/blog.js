@@ -3,7 +3,7 @@ const router = express.Router()
 
 const asyncWrap = require('../utils/asyncWrap')
 const { loginRequired } = require('../middleware/loginRequired')
-const Blog = require('../controller/blog')
+const Blog = require('../controllers/blog')
 
 
 router.get('', asyncWrap(Blog.viewAll))

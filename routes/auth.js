@@ -3,7 +3,7 @@ const passport = require('passport')
 const router = express.Router()
 
 const asyncWrap = require('../utils/asyncWrap')
-const Auth = require('../controller/auth')
+const Auth = require('../controllers/auth')
 
 
 router.route('/register')
