@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const asyncWrap = require('../utils/asyncWrap')
-const { loginRequired } = require('../middleware/loginRequired')
+const { loginRequired } = require('../middlewares/loginRequired')
 const Blog = require('../controllers/blog')
 
 

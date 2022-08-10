@@ -14,8 +14,8 @@ const methodOverride = require('method-override')
 app.use(methodOverride('_method'))
 
 // custom logger middleware
-const { logger } = require('./middleware/logger')
-const { errorHandler } = require('./middleware/errorHandler')
+const { logger } = require('./middlewares/logger')
+const { errorHandler } = require('./middlewares/errorHandler')
 app.use(logger)
 
 // load util functions
