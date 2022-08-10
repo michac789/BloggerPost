@@ -19,7 +19,6 @@ const { errorHandler } = require('./middleware/errorHandler')
 app.use(logger)
 
 // load util functions
-const asyncWrap = require('./utils/asyncWrap')
 const ExpressError = require('./utils/ExpressError')
 
 // connect to mongoose
@@ -38,14 +37,13 @@ db.once("open", () => {
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, '/views'))
 
-
 // parse incoming request body
 app.use(express.urlencoded({ extended: true,}))
 
 // load static files
 app.use(express.static(path.join(__dirname, '/public')))
 
-// ??
+// session & flash
 const session = require('express-session')
 const flash = require('connect-flash')
 const sessionConfig = {
@@ -72,6 +70,7 @@ passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
+// save flash messages on sessions
 app.use((req, res, next) => {
     res.locals.user = req.user
     res.locals.success = req.flash('success')
@@ -83,6 +82,10 @@ app.get('/', (req, res) => {
     res.render('templates/home')
 })
 
+// main pages
+const main = require('./routes/main')
+app.use('/', main)
+
 // auth app (register, login, logout)
 const auth = require('./routes/auth')
 app.use('/auth', auth)
@@ -91,8 +94,12 @@ app.use('/auth', auth)
 const blog = require('./routes/blog')
 app.use('/blog', blog)
 
+// profile app
+const profile = require('./routes/profile')
+app.use('/profile', profile)
+
 // error handler for other undefined routes
-app.all("*", (req, res, next) => {
+app.all("*", (_, __, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
 

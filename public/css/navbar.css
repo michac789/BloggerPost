@@ -5,3 +5,15 @@
 .medsize {
     font-size: 24px;
 }
+
+.maintitle {
+    font-family: "Copperplate", "Georgia", "Arial";
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.mainicon {
+    color: blue;
+    font-size: 27px;
+    padding-left: 10px;
+}

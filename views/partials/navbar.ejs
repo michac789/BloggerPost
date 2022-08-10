@@ -5,21 +5,33 @@
 
     <div class="navbar-brand">
         <a class="navbar-item" href="/">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-        </a>
-        <a class="navbar-item ml-2" href="/">
-            
-            <i class='fas fa-user-circle mr-3 profilecol medsize'></i>
-            <span>
-                <strong class="profilecol">
-                    <% if (user) { %>
-                        <%= user.username %>
-                    <% } else { %>
-                        Not Logged In
-                    <% } %> <br>
-                </strong>
+            <span class="maintitle">
+                <div class="mainicon">
+                    <i class='fab fa-blogger-b'></i>
+                </div>
             </span>
         </a>
+
+        <% if (user) { %>
+            <a class="navbar-item ml-2" href="/profile/<%= user.username %>">
+                <i class='fas fa-user-circle mr-3 profilecol medsize'></i>
+                <span>
+                    <strong class="profilecol">
+                        <%= user.username %>
+                    </strong>
+                </span>
+            </a>
+        <% } else { %>
+            <a class="navbar-item ml-2" href="/auth/login">
+                <i class='fas fa-user-alt-slash mr-3 profilecol medsize'></i>
+                <span>
+                    <strong class="profilecol">
+                        Not Logged In
+                    </strong>
+                </span>
+            </a>
+        <% } %> <br>
+
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
