@@ -5,7 +5,6 @@
     (this last logic is handled in login post route)
 */
 const loginRequired = (req, res, next) => {
-    console.log(req.originalUrl)
     if (!req.isAuthenticated()) {
         req.session.returnTo = req.originalUrl
         req.flash('error', 'Please sign in to view this route!')

@@ -2,16 +2,17 @@
 
 <h1>Profile View Page - TODO</h1>
 
-<%= user %> <br>
+<%= curr_user %> <br>
 
-Username: <%= user.username %> <br>
-Email: <%= user.email %> <br>
-Age: <%= user.age %> <br>
-Gender: <%= user.gender %> <br>
-Status: <%= user.status %> <br>
-Description: <%= user.description %> <br>
+Username: <%= curr_user.username %> <br>
+Email: <%= curr_user.email %> <br>
+Age: <%= curr_user.age %> <br>
+Gender: <%= curr_user.gender %> <br>
+Status: <%= curr_user.status %> <br>
+Description: <%= curr_user.description %> <br>
 
-<a href="/profile/<%= user.username %>/edit">
+TODO - hide this if not user
+<a href="/profile/<%= curr_user.username %>/edit">
     Edit
 </a> <br>
 

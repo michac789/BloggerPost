@@ -4,21 +4,21 @@ const User = require("../models/user")
 
 module.exports.view = async (req, res) => {
     console.log(req.params.username)
-    const user = await User.findOne({
+    const curr_user = await User.findOne({
         "username": req.params.username,
     })
-    if (!user) {
-        req.flash('error', "Invalid ID!")
+    if (!curr_user) {
+        req.flash('error', "Invalid username!")
         next()
     }
-    res.render('profile/view', { user })
+    res.render('profile/view', { curr_user })
 }
 
 module.exports.edit = async (req, res) => {
-    const user = await User.findOne({
+    const curr_user = await User.findOne({
         "username": req.params.username,
     })
-    res.render('profile/edit', { user })
+    res.render('profile/edit', { curr_user })
 }
 
 module.exports.update = async (req, res) => {

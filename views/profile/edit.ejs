@@ -2,22 +2,22 @@
 
 <h1>Profile Edit Page - TODO</h1>
 
-<%= user %> <br>
+<%= curr_user %> <br>
 
 TODO TODO TODO
 
-<form action="/profile/<%= user.username %>" method="POST">
+<form action="/profile/<%= curr_user.username %>" method="POST">
 
     <div class="field">
         <label class="label" for="email">Email: </label>
         <input class="input" type="text" name="email" id="email"
-            value="<%= user.email %>">
+            value="<%= curr_user.email %>">
     </div>
 
     <div class="field">
         <label class="label" for="age">Age: </label>
         <input class="input" type="number" name="age" id="age"
-            value="<%= user.age %>">
+            value="<%= curr_user.age %>">
     </div>
 
     <div class="field">
@@ -37,14 +37,14 @@ TODO TODO TODO
     <div class="field">
         <label class="label" for="status">Status: </label>
         <input class="input" type="text" name="status" id="status"
-            value="<%= user.status %>">
+            value="<%= curr_user.status %>">
     </div>
 
     <div class="field">
         <label for="description" class="label">Description: </label>
         <textarea class="textarea" name="description" id="description"
         cols="30" rows="10" placeholder="Enter your blog description here..."
-        ><%= user.description %></textarea>
+        ><%= curr_user.description %></textarea>
     </div>
 
     <button type="submit">Submit</button>
