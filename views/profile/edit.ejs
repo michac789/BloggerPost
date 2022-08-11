@@ -24,11 +24,11 @@ TODO TODO TODO
         <label class="label">Gender: </label>
         <div class="control">
             <label for="male" class="radio">
-                <input type="radio" name="male" id="male">
+                <input type="radio" name="gender" value="male" id="male">
                 Male
             </label>
-            <label for="male" class="radio">
-                <input type="radio" name="male" id="male">
+            <label for="female" class="radio">
+                <input type="radio" name="gender" value="female" id="female">
                 Female
             </label>
         </div>
@@ -46,7 +46,7 @@ TODO TODO TODO
         cols="30" rows="10" placeholder="Enter your blog description here..."
         ><%= user.description %></textarea>
     </div>
-    
+
     <button type="submit">Submit</button>
 </form>
 

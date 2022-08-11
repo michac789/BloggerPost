@@ -22,6 +22,7 @@ module.exports.edit = async (req, res) => {
 }
 
 module.exports.update = async (req, res) => {
+    console.log(req.body)
     const update = await User.updateOne({ username: req.params.username,}, {
         $set: {
             "email": req.body.email,
