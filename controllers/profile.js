@@ -14,6 +14,13 @@ module.exports.view = async (req, res) => {
     res.render('profile/view', { user })
 }
 
+module.exports.edit = async (req, res) => {
+    const user = await User.findOne({
+        "username": req.params.username,
+    })
+    res.render('profile/edit', { user })
+}
+
 module.exports.update = async (req, res) => {
     const update = await User.updateOne({ username: req.params.username,}, {
         $set: {

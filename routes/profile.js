@@ -10,7 +10,7 @@ router.route('/:username')
     .post(asyncWrap(Profile.update))
 
 router.route('/:username/edit')
-    .get()
+    .get(asyncWrap(Profile.edit))
 
 
 module.exports = router
