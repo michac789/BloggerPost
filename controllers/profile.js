@@ -1,3 +1,4 @@
+const { register } = require("../models/user")
 const User = require("../models/user")
 
 
@@ -10,5 +11,21 @@ module.exports.view = async (req, res) => {
         req.flash('error', "Invalid ID!")
         next()
     }
-    res.render('profile/view')
+    res.render('profile/view', { user })
+}
+
+module.exports.update = async (req, res) => {
+    const update = await User.updateOne({ username: req.params.username,}, {
+        $set: {
+            "email": req.body.email,
+            "age": req.body.age,
+            "status": req.body.status,
+            "description": req.body.description,
+            "gender": req.body.gender,
+        }
+    })
+    if (update.acknowledged) {
+        req.flash('success', `Successfully modified your profile!`)
+    }
+    res.redirect(`/profile/${req.params.username}`)
 }

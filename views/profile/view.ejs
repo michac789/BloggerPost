@@ -1,5 +1,26 @@
 <% layout('layout/root')%>
 
-<h1>Profile Page - TODO</h1>
+<h1>Profile View Page - TODO</h1>
+
+<%= user %> <br>
+
+Username: <%= user.username %> <br>
+Email: <%= user.email %> <br>
+Age: <%= user.age %> <br>
+Gender: <%= user.gender %> <br>
+Status: <%= user.status %> <br>
+Description: <%= user.description %> <br>
+
+<br>Edit trial here...
+<form action="/profile/<%= user.username %>" method="POST">
+    test form...
+    Email: <input type="text" name="email" id="email">
+    Age: <input type="number" name="age" id="age">
+    Gender: <input type="text" name="gender" id="gender">
+    Status: <input type="text" name="status" id="status">
+    <textarea name="description" id="description" cols="30" rows="10"
+    >Description here...</textarea>
+    <button type="submit">Submit</button>
+</form>
 
 <a href="/">Back to main menu</a><br>

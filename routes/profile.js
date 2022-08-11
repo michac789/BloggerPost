@@ -5,7 +5,12 @@ const asyncWrap = require('../utils/asyncWrap')
 const Profile = require('../controllers/profile')
 
 
-router.route('/:username').get(asyncWrap(Profile.view))
+router.route('/:username')
+    .get(asyncWrap(Profile.view))
+    .post(asyncWrap(Profile.update))
+
+router.route('/:username/edit')
+    .get()
 
 
 module.exports = router

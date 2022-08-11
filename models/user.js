@@ -8,12 +8,30 @@ const userSchema = new Schema({
         required: true,
         unique: true,
     },
-    // age: {
-    //     type: Number,
-    //     required: false,
-    //     min: [12, "You must be at least 12 years old!"],
-    //     max: [100, "Maximum age is 100 years old!"],
-    // },
+    status: {
+        type: String,
+        required: true,
+        default: "",
+        maxLength: 50,
+    },
+    description: {
+        type: String,
+        required: true,
+        default: "",
+        maxLength: 200,
+    },
+    age: {
+        type: Number,
+        required: true,
+        default: "",
+        min: [12, "You must be at least 12 years old!"],
+        max: [100, "Maximum age is 100 years old!"],
+    },
+    gender: {
+        type: String,
+        enum: ['unspecified', 'male', 'female'],
+        default: 'unspecified',
+    },
 })
 
 userSchema.plugin(passportLocalMongoose)
@@ -31,5 +49,3 @@ module.exports = mongoose.model('User', userSchema)
 //     this.password = await bcrypt.hash(this.password, 12)
 //     next()
 // })
-
-// module.exports = mongoose.model('User', userSchema)
